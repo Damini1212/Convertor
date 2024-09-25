@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Convertor</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="tempArea">
+      <h1>Temperature Convertor</h1>
+
+      <div class="tempConverter">
+        <table>
+          <tr>
+            <td>
+              <label for="temperatureInput">Temperature:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                id="temperatureInput"
+                placeholder="Enter temperature"
+              />
+              <span class="error"></span>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="unitSelect">Unit:</label>
+            </td>
+            <td>
+              <select id="unitSelect">
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <button id="convertButton">CONVERT</button>
+
+      <div id="resultArea"></div>
+      <script>
+        document
+          .getElementById("convertButton")
+          .addEventListener("click", function () {
+            // Get user input and selected unit
+            var tempInput = document.getElementById("temperatureInput").value;
+            var unitSelect = document.getElementById("unitSelect").value;
+            var resultArea = document.getElementById("resultArea");
+
+            // Validate input
+            var temp = parseFloat(tempInput);
+            if (isNaN(temp)) {
+              resultArea.textContent = "Please enter a valid number.";
+              return;
+            }
+
+            // Perform conversion
+            var convertedTemp;
+            var resultUnit;
+
+            if (unitSelect === "C") {
+              // Convert Celsius to Fahrenheit
+              convertedTemp = (temp * 9) / 5 + 32;
+              resultUnit = "Fahrenheit";
+            } else {
+              // Convert Fahrenheit to Celsius
+              convertedTemp = ((temp - 32) * 5) / 9;
+              resultUnit = "Celsius";
+            }
+
+            // Display result
+            resultArea.textContent = `Converted Temperature: ${convertedTemp.toFixed(
+              2
+            )} ${resultUnit}`;
+          });
+      </script>
+    </div>
+  </body>
+</html>
